@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="bottom_nav_action_popular">Popular</string>
+    <string name="bottom_nav_action_top_rated">Top Rated</string>
+    <string name="bottom_nav_action_settings">Settings</string>
 </resources>
