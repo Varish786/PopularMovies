@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -16,7 +17,8 @@
         android:layout_marginStart="@dimen/margin_movie_card_horizontal"
         android:layout_marginTop="@dimen/margin_movie_card_vertical"
         android:layout_marginEnd="@dimen/margin_movie_card_horizontal"
-        android:layout_marginBottom="@dimen/margin_movie_card_vertical">
+        android:layout_marginBottom="@dimen/margin_movie_card_vertical"
+        app:cardElevation="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,11 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/poster_w185_thor"
+                android:src="@drawable/movie_placeholder"
                 app:layout_constraintDimensionRatio="h,2:3"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/poster_w185_thor" />
+                bind:url="@{movie.getLargePosterUrl()}"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_movie_title"
