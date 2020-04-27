@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import io.github.abhishek.popularmovies.R;
 import io.github.abhishek.popularmovies.databinding.ActivityMainBinding;
 import io.github.abhishek.popularmovies.ui.movies.MovieFragment;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Timber.plant(new Timber.DebugTree());
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this);

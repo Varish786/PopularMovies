@@ -1,9 +1,12 @@
 package io.github.abhishek.popularmovies.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
 public class Movie {
-    private final String title;
-    private final float votes;
+    @SerializedName("title") String title;
+    @SerializedName("vote_average") float votes;
+    @SerializedName("poster_path") String posterPath;
 }
