@@ -2,7 +2,6 @@ package io.github.abhishek.popularmovies.ui;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import io.github.abhishek.popularmovies.R;
 import io.github.abhishek.popularmovies.databinding.ActivityMainBinding;
 import io.github.abhishek.popularmovies.ui.movies.MovieFragment;
+import io.github.abhishek.popularmovies.ui.settings.SettingsFragment;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment fragment = null;
     public static final String FRAG_TAG_POPULAR = "frag-popular";
     public static final String FRAG_TAG_TOP_RATED = "frag-top-rated";
+    public static final String FRAG_TAG_SETTINGS = "frag-settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements
                 loadTopRatedMoviesFragment();
                 return true;
             case R.id.action_settings:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                loadSettingsFragment();
+                return true;
         }
         return false;
     }
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // Hide rest of the fragments if they exist
-        hideFragments(FRAG_TAG_TOP_RATED);
+        hideFragments(FRAG_TAG_TOP_RATED, FRAG_TAG_SETTINGS);
     }
 
     private void loadTopRatedMoviesFragment() {
@@ -76,7 +78,21 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // Hide rest of the fragments if they exist
-        hideFragments(FRAG_TAG_POPULAR);
+        hideFragments(FRAG_TAG_POPULAR, FRAG_TAG_SETTINGS);
+    }
+
+    private void loadSettingsFragment() {
+        fragment = fragmentManager.findFragmentByTag(FRAG_TAG_SETTINGS);
+        if (fragment != null) {
+            // If fragment already exists, show the Fragment
+            fragmentManager.beginTransaction().show(fragment).commit();
+        } else {
+            // If it doesn't exists, create and add the fragment
+            fragmentManager.beginTransaction().add(R.id.fragment_container, new SettingsFragment(), FRAG_TAG_SETTINGS).commit();
+        }
+
+        // Hide rest of the fragments if they exist
+        hideFragments(FRAG_TAG_POPULAR, FRAG_TAG_TOP_RATED);
     }
 
     private void hideFragments(String... tags) {
